@@ -16,7 +16,7 @@ use App\Http\Controllers\ConfigController;
 |
 */
 Route:: get('config', [ConfigController::class, 'index']);
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);
 Route::get('/',function () {
     return view('welcome');
 });
