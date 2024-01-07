@@ -7,14 +7,7 @@
 </head>
 <body>
 
-
 @yield('content')
-
-
-@section('bredcrump')
-
-@show
-
 
 </body>
 </html>

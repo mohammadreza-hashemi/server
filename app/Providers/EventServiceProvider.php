@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ProductOffer;
+use App\Listeners\SendNotification;
+use App\Listeners\SendSms;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +20,14 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        'App\Events\Products\ProductsOffer' => [
+            'App\Listeners\Product\SendNotification',
+            'App\Listeners\Product\sendSms',
+        ],
+        'App\Events\User\BirthDay' => [
+            'App\Listeners\User\SmsHappyBirthDay',
+            'App\Listeners\User\SendDicountCode',
         ],
     ];
 
