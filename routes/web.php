@@ -16,7 +16,8 @@ use App\Http\Controllers\ConfigController;
 |
 */
 Route:: get('config', [ConfigController::class, 'index']);
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)
+    ->middleware(['tokenIsValid','hasRole:editor']);
 Route::get('/',function () {
     return view('welcome');
 });
