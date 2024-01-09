@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -36,5 +37,25 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::pattern('user', '[1-9]+');
+        Route::model('user', User::class);//allway route model bindig
+//make throttle
+
+        RateLimiter::for('global', function (Request $request) {
+            return $request->user()
+                ? Limit::perMinute(100)->by($request->user()->id)
+                : Limit::perMinute(10)->by($request->ip())->response(function () {
+                    return response('custom response !',429);
+                });
+        });
+
+        RateLimiter::for('login',function (Request $request) {
+            return [
+             Limit::perMinute(10),
+             Limit::perMinute(3)->by($request->input('email','mygmail.com' )),
+            ];
+        });
+
     }
 }

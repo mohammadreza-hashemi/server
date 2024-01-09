@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Category;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Category $category)
     {
-        return 'show all users';
+
+        return $category->value;
+
+
+//        return redirect()->route('welcome');
+//        return to_route('welcome');
     }
 
     /**
@@ -21,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return 'show create form ';
+        return view('users.create');
     }
 
     /**

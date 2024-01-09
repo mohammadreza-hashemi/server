@@ -13,6 +13,15 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * this is for route model binding
+     */
+//    public function getRouteKeyName()
+//    {
+//        return 'name';
+//    }
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -42,4 +51,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
 }
