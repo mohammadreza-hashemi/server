@@ -17,10 +17,29 @@ use App\Http\Controllers\ConfigController;
 */
 Route:: get('config', [ConfigController::class, 'index']);
 Route::resource('user', UserController::class);
-Route::get('/',function () {
+Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+Route::post('test/{id}', [UserController::class, 'index'])->missing(function () {
+    dd('not found');
 });
 
+Route::get('x', function () {
+    return session()->all();
+});
+
+Route::post("response", [UserController::class, 'show']);
+
+Route::get('cookie', function () {
+
+
+
+
+//    return response()->download(public_path('storage/ReferenceCard.pdf'));
+//    return redirect('/')->with('statussss','data');
+//    $cookie = cookie('my-first-cookie', '12', 2);
+//    return response('Hello World')->cookie($cookie);
+});
 
 
 

@@ -6,6 +6,10 @@
 
 @section('content')
     <h2> this is content section</h2>
+
+    @if(session('session flashed'))
+        خوش آمدید {{session('session flasjed')}}
+    @endif
 @endsection
 
 
