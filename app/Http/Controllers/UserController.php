@@ -11,8 +11,22 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+//        session(['key' => 'value']);
+//        session()->put('key1', 'value1');
+//        session()->regenerate();
+//        session()->put('key2','value2');
+//        session()->put('key3','value3');
+//        $request->session()->regenerate();
+//        $request->session()->invalidate();
+//        session()->decrement('count', 2);
+//        session()->increment('count', 5);
+//        session()->flash('alarm','hello');
+
+
+        return session()->all();
         return 'show all users';
     }
 

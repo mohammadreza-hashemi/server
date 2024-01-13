@@ -19,7 +19,7 @@ Route:: get('config', [ConfigController::class, 'index']);
 Route::resource('user', UserController::class);
 Route::get('/',function () {
     return view('welcome');
-});
+})->block(10,10);
 
 
 
