@@ -4,17 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
+    @stack('script')
 </head>
 <body>
-
-
 @yield('content')
-
-
 @section('bredcrump')
-
 @show
-
-
 </body>
 </html>
