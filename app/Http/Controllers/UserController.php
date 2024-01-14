@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CustomException;
+use App\Exceptions\monException;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class UserController extends Controller
 {
@@ -13,7 +18,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return 'show all users';
+        try {
+            if (true) {
+                throw new CustomException('data is invalid');
+            }
+        } catch (CustomException $exceptione) {
+            echo $exceptione->getMessage();
+        }
     }
 
     /**
