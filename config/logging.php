@@ -55,6 +55,8 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
+//            'tap' => [App\Logging\CustomizeFormatter::class],
+//            'path' => storage_path('logs/stacks/x.log'),
             'ignore_exceptions' => false,
         ],
 

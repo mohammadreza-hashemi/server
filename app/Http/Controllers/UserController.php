@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
@@ -13,6 +16,22 @@ class UserController extends Controller
      */
     public function index()
     {
+        try {
+            $error = 'my error ';
+            Log::alert($error);
+            Log::critical($error);
+            Log::error($error);
+            Log::warning($error);
+            Log::notice($error);
+            Log::info($error, ['12']);
+            Log::debug($error);
+            Log::emergency($error);
+            throw new \Exception($error);
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
         return 'show all users';
     }
 
