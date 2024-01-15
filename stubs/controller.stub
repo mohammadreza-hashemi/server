@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace {{ namespace }};
 
-use App\Http\Requests\User\CreateUserRequest;
-use App\Http\Requests\User\UpdateeUserRequest;
+use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
-class UserController extends Controller
+class {{ class }} extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Artisan::call('mail:send 999 --queue=defautl');
-        return 'show all users';
+        //
     }
 
     /**
@@ -23,15 +20,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        return 'show create form ';
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserRequest $request)
+    public function store(Request $request)
     {
-        return $request;
+        //
     }
 
     /**
@@ -39,7 +36,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return 'user information';
+        //
     }
 
     /**
@@ -47,15 +44,15 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return 'user edit form';
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateeUserRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        return 'user update';
+        //
     }
 
     /**
@@ -63,6 +60,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'delete user';
+        //
     }
 }
