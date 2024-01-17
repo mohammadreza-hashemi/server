@@ -16,10 +16,21 @@ use App\Http\Controllers\ConfigController;
 |
 */
 Route:: get('config', [ConfigController::class, 'index']);
-Route::resource('user', UserController::class);
-Route::get('/',function () {
+Route::resource('user', UserController::class)->middleware('auth');
+Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', function () {
+
+    return 'login page';
+})->name('login');
+
+Route::get('/tokens/create',function (\Illuminate\Http\Request $request){
+    $token = $request->user()->createToken('myFirstToken');
+    return ['token' => $token->plainTextToken];
+});
+
+
 
 
 

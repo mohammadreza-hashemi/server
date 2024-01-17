@@ -4,16 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return 'show all users';
+        try {
+//            Admin::insert([
+//                'name' => $request->name,
+//                'city' => $request->city,
+//                'email' => $request->email,
+//                'status' => $request->status,
+//                'password' => Hash::make($request->password)
+//            ]);
+
+            if (Auth::guard('web')
+                ->attempt(['email' => $request->email, 'password' => $request->password], 1)) {
+                return "you are logined successfully !";
+            } else {
+                return 'oops!';
+            }
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+
+//
+
     }
 
     /**
@@ -29,7 +56,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        return $request;
+
     }
 
     /**
