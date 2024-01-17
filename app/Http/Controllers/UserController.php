@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -13,7 +16,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        return 'show all users';
+
+//        Cache::get('users',function(){
+//            return User::all();
+//        });
+//
+//        if (Cache::has('users')) {
+//            return Cache::get('users');
+//        }
+
+        $users = Cache::remember('users', 300, function () {
+            return User::all();
+        });
+
+        return $users;
+
+
     }
 
     /**
