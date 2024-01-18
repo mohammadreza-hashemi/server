@@ -4,16 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return 'show all users';
+
+        $user = Auth::user();
+//        if (Gate::forUser($user)->allows('update-post', $user)) {
+//            Log::info('you have access');
+//        } else {
+//            Log::info('you have denied!');
+//        }
+
+
+//        if (Gate::any(['update-post', 'delete-post'], $user)) {
+//            Log::info('any work successfully !');
+//        }
+//
+//        if (Gate::none(['update-post', 'delete-post'], $user)) {
+//            Log::info('none work successfully !');
+//        }
+//        return  Gate::authorize('update-post',$user);
+//        if (Gate::check(['delete-post'],$user)) {
+//            Log::info('your are access!');
+//        } else {
+//            Log::info('your are denied!');
+//        }
+//        $response = Gate::inspect('delete', $user);
+//        if ($response->allowed()) {
+//            return $response->message();
+//        } else {
+//            return $response->message();
+//        }
+//        if (Gate::allows('update', $user)) {
+//            return 'done';
+//        }
+
+//        if($request->user()->can('update',$user)){
+//            return 'view update';
+//        }
+
+        $this->authorize('update', $user);
+
+        return 'message';
     }
 
     /**
