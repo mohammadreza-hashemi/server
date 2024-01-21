@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateeUserRequest;
+use App\Models\Permission;
+use App\Models\Role;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -13,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return 'show all users';
+
     }
 
     /**

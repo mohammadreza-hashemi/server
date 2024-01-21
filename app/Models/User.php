@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,4 +43,45 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function phone()
+    {
+        return $this->hasOne(Phone::class, 'user_id');
+    }
+
+    public function post()
+    {
+        return $this->hasOne(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comment::class, Post::class, 'user_id', 'post_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+
+    public function hasPermissionTo()
+    {
+        return true;
+    }
+
+
+    public function avatar()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggables');
+    }
 }
